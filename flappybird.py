@@ -18,29 +18,10 @@ WIN_HEIGHT = 512
 
 
 class Bird(pygame.sprite.Sprite):
-    """Represents the bird controlled by the player.
-
-    The bird is the 'hero' of this game.  The player can make it climb
-    (ascend quickly), otherwise it sinks (descends more slowly).  It must
-    pass through the space in between pipes (for every pipe passed, one
-    point is scored); if it crashes into a pipe, the game ends.
-
+    """
     Attributes:
     x: The bird's X coordinate.
     y: The bird's Y coordinate.
-    msec_to_climb: The number of milliseconds left to climb, where a
-        complete climb lasts Bird.CLIMB_DURATION milliseconds.
-
-    Constants:
-    WIDTH: The width, in pixels, of the bird's image.
-    HEIGHT: The height, in pixels, of the bird's image.
-    SINK_SPEED: With which speed, in pixels per millisecond, the bird
-        descends in one second while not climbing.
-    CLIMB_SPEED: With which speed, in pixels per millisecond, the bird
-        ascends in one second while climbing, on average.  See also the
-        Bird.update docstring.
-    CLIMB_DURATION: The number of milliseconds it takes the bird to
-        execute a complete climb.
     """
 
     WIDTH = HEIGHT = 32
