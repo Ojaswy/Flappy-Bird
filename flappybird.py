@@ -39,20 +39,7 @@ class Bird(pygame.sprite.Sprite):
         self._mask_wingdown = pygame.mask.from_surface(self._img_wingdown)
 
     def update(self, delta_frames=1):
-        """Update the bird's position.
-
-        This function uses the cosine function to achieve a smooth climb:
-        In the first and last few frames, the bird climbs very little, in the
-        middle of the climb, it climbs a lot.
-        One complete climb lasts CLIMB_DURATION milliseconds, during which
-        the bird ascends with an average speed of CLIMB_SPEED px/ms.
-        This Bird's msec_to_climb attribute will automatically be
-        decreased accordingly if it was > 0 when this method was called.
-
-        Arguments:
-        delta_frames: The number of frames elapsed since this method was
-            last called.
-        """
+      
         if self.msec_to_climb > 0:
             frac_climb_done = 1 - self.msec_to_climb/Bird.CLIMB_DURATION
             self.y -= (Bird.CLIMB_SPEED * frames_to_msec(delta_frames) *
@@ -63,13 +50,7 @@ class Bird(pygame.sprite.Sprite):
 
     @property
     def image(self):
-        """Get a Surface containing this bird's image.
-
-        This will decide whether to return an image where the bird's
-        visible wing is pointing upward or where it is pointing downward
-        based on pygame.time.get_ticks().  This will animate the flapping
-        bird, even though pygame doesn't support animated GIFs.
-        """
+      
         if pygame.time.get_ticks() % 500 >= 250:
             return self._img_wingup
         else:
