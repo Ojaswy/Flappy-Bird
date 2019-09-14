@@ -30,20 +30,7 @@ class Bird(pygame.sprite.Sprite):
     CLIMB_DURATION = 333.3
 
     def __init__(self, x, y, msec_to_climb, images):
-        """Initialise a new Bird instance.
-
-        Arguments:
-        x: The bird's initial X coordinate.
-        y: The bird's initial Y coordinate.
-        msec_to_climb: The number of milliseconds left to climb, where a
-            complete climb lasts Bird.CLIMB_DURATION milliseconds.  Use
-            this if you want the bird to make a (small?) climb at the
-            very beginning of the game.
-        images: A tuple containing the images used by this bird.  It
-            must contain the following images, in the following order:
-                0. image of the bird with its wing pointing upward
-                1. image of the bird with its wing pointing downward
-        """
+      
         super(Bird, self).__init__()
         self.x, self.y = x, y
         self.msec_to_climb = msec_to_climb
