@@ -1,7 +1,6 @@
 #! /usr/bin/env python3
 
 """Flappy Bird, implemented using Pygame."""
- 
 import math
 import os
 from random import randint
@@ -74,49 +73,12 @@ class Bird(pygame.sprite.Sprite):
 
 
 class PipePair(pygame.sprite.Sprite):
-    """Represents an obstacle.
-
-    A PipePair has a top and a bottom pipe, and only between them can
-    the bird pass -- if it collides with either part, the game is over.
-
-    Attributes:
-    x: The PipePair's X position.  This is a float, to make movement
-        smoother.  Note that there is no y attribute, as it will only
-        ever be 0.
-    image: A pygame.Surface which can be blitted to the display surface
-        to display the PipePair.
-    mask: A bitmask which excludes all pixels in self.image with a
-        transparency greater than 127.  This can be used for collision
-        detection.
-    top_pieces: The number of pieces, including the end piece, in the
-        top pipe.
-    bottom_pieces: The number of pieces, including the end piece, in
-        the bottom pipe.
-
-    Constants:
-    WIDTH: The width, in pixels, of a pipe piece.  Because a pipe is
-        only one piece wide, this is also the width of a PipePair's
-        image.
-    PIECE_HEIGHT: The height, in pixels, of a pipe piece.
-    ADD_INTERVAL: The interval, in milliseconds, in between adding new
-        pipes.
-    """
 
     WIDTH = 80
     PIECE_HEIGHT = 32
     ADD_INTERVAL = 3000
 
     def __init__(self, pipe_end_img, pipe_body_img):
-        """Initialises a new random PipePair.
-
-        The new PipePair will automatically be assigned an x attribute of
-        float(WIN_WIDTH - 1).
-
-        Arguments:
-        pipe_end_img: The image to use to represent a pipe's end piece.
-        pipe_body_img: The image to use to represent one horizontal slice
-            of a pipe's body.
-        """
         self.x = float(WIN_WIDTH - 1)
         self.score_counted = False
 
@@ -170,54 +132,20 @@ class PipePair(pygame.sprite.Sprite):
 
     @property
     def rect(self):
-        """Get the Rect which contains this PipePair."""
         return Rect(self.x, 0, PipePair.WIDTH, PipePair.PIECE_HEIGHT)
 
     def update(self, delta_frames=1):
-        """Update the PipePair's position.
 
-        Arguments:
-        delta_frames: The number of frames elapsed since this method was
-            last called.
-        """
         self.x -= ANIMATION_SPEED * frames_to_msec(delta_frames)
 
     def collides_with(self, bird):
-        """Get whether the bird collides with a pipe in this PipePair.
 
-        Arguments:
-        bird: The Bird which should be tested for collision with this
-            PipePair.
-        """
         return pygame.sprite.collide_mask(self, bird)
 
 
 def load_images():
-    """Load all images required by the game and return a dict of them.
-
-    The returned dict has the following keys:
-    background: The game's background image.
-    bird-wingup: An image of the bird with its wing pointing upward.
-        Use this and bird-wingdown to create a flapping bird.
-    bird-wingdown: An image of the bird with its wing pointing downward.
-        Use this and bird-wingup to create a flapping bird.
-    pipe-end: An image of a pipe's end piece (the slightly wider bit).
-        Use this and pipe-body to make pipes.
-    pipe-body: An image of a slice of a pipe's body.  Use this and
-        pipe-body to make pipes.
-    """
 
     def load_image(img_file_name):
-        """Return the loaded pygame image with the specified file name.
-
-        This function looks for images in the game's images folder
-        (./images/).  All images are converted before being returned to
-        speed up blitting.
-
-        Arguments:
-        img_file_name: The file name (including its extension, e.g.
-            '.png') of the required image, without a file path.
-        """
         file_name = os.path.join('.', 'images', img_file_name)
         img = pygame.image.load(file_name)
         img.convert()
@@ -233,12 +161,7 @@ def load_images():
 
 
 def frames_to_msec(frames, fps=FPS):
-    """Convert frames to milliseconds at the specified framerate.
 
-    Arguments:
-    frames: How many frames to convert to milliseconds.
-    fps: The framerate to use for conversion.  Default: FPS.
-    """
     return 1000.0 * frames / fps
 
 
@@ -332,8 +255,6 @@ def main():
         frame_clock += 1
     print('Game over! Score: %i' % score)
     pygame.quit()
-
-
 if __name__ == '__main__':
     # If this module had been imported, __name__ would be 'flappybird'.
     main() 
