@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-"""Flappy Bird, implemented using Pygame."""
+"""Flappy Bird, implemented using Pygame.""" 
 import math
 import os
 from random import randint
